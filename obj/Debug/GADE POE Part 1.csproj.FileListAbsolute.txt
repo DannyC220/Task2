@@ -1,0 +1,30 @@
+C:\Users\User\Documents\Second and First year work\1st Year\GADE5111 Practise Activities second year\GADE POE Part 1\bin\Debug\GADE POE Part 1.exe.config
+C:\Users\User\Documents\Second and First year work\1st Year\GADE5111 Practise Activities second year\GADE POE Part 1\bin\Debug\GADE POE Part 1.exe
+C:\Users\User\Documents\Second and First year work\1st Year\GADE5111 Practise Activities second year\GADE POE Part 1\bin\Debug\GADE POE Part 1.pdb
+C:\Users\User\Documents\Second and First year work\1st Year\GADE5111 Practise Activities second year\GADE POE Part 1\obj\Debug\GADE POE Part 1.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\Second and First year work\1st Year\GADE5111 Practise Activities second year\GADE POE Part 1\obj\Debug\GADE_POE_Part_1.Form1.resources
+C:\Users\User\Documents\Second and First year work\1st Year\GADE5111 Practise Activities second year\GADE POE Part 1\obj\Debug\GADE_POE_Part_1.Properties.Resources.resources
+C:\Users\User\Documents\Second and First year work\1st Year\GADE5111 Practise Activities second year\GADE POE Part 1\obj\Debug\GADE POE Part 1.csproj.GenerateResource.Cache
+C:\Users\User\Documents\Second and First year work\1st Year\GADE5111 Practise Activities second year\GADE POE Part 1\obj\Debug\GADE POE Part 1.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\Second and First year work\1st Year\GADE5111 Practise Activities second year\GADE POE Part 1\obj\Debug\GADE POE Part 1.exe
+C:\Users\User\Documents\Second and First year work\1st Year\GADE5111 Practise Activities second year\GADE POE Part 1\obj\Debug\GADE POE Part 1.pdb
+C:\Users\User\Desktop\Daniel Caldeira - 17700718 - GADE POE Part 1 (2)\Daniel Caldeira - 17700718 - GADE POE Part 1\obj\Debug\GADE POE Part 1.csprojAssemblyReference.cache
+C:\Users\User\Desktop\Daniel Caldeira - 17700718 - GADE POE Part 1 (2)\Daniel Caldeira - 17700718 - GADE POE Part 1\obj\Debug\GADE_POE_Part_1.Form1.resources
+C:\Users\User\Desktop\Daniel Caldeira - 17700718 - GADE POE Part 1 (2)\Daniel Caldeira - 17700718 - GADE POE Part 1\obj\Debug\GADE_POE_Part_1.Properties.Resources.resources
+C:\Users\User\Desktop\Daniel Caldeira - 17700718 - GADE POE Part 1 (2)\Daniel Caldeira - 17700718 - GADE POE Part 1\obj\Debug\GADE POE Part 1.csproj.GenerateResource.cache
+C:\Users\User\Desktop\Daniel Caldeira - 17700718 - GADE POE Part 1 (2)\Daniel Caldeira - 17700718 - GADE POE Part 1\obj\Debug\GADE POE Part 1.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Daniel Caldeira - 17700718 - GADE POE Part 1 (2)\Daniel Caldeira - 17700718 - GADE POE Part 1\obj\Debug\GADE POE Part 1.exe
+C:\Users\User\Desktop\Daniel Caldeira - 17700718 - GADE POE Part 1 (2)\Daniel Caldeira - 17700718 - GADE POE Part 1\obj\Debug\GADE POE Part 1.pdb
+C:\Users\User\Desktop\Daniel Caldeira - 17700718 - GADE POE Part 1 (2)\Daniel Caldeira - 17700718 - GADE POE Part 1\bin\Debug\GADE POE Part 1.exe.config
+C:\Users\User\Desktop\Daniel Caldeira - 17700718 - GADE POE Part 1 (2)\Daniel Caldeira - 17700718 - GADE POE Part 1\bin\Debug\GADE POE Part 1.exe
+C:\Users\User\Desktop\Daniel Caldeira - 17700718 - GADE POE Part 1 (2)\Daniel Caldeira - 17700718 - GADE POE Part 1\bin\Debug\GADE POE Part 1.pdb
+E:\Daniel Caldeira bbb - 17700718 - GADE POE Part 1 (2) bes\Daniel Caldeira - 17700718 - GADE POE Part 1\bin\Debug\GADE POE Part 1.exe.config
+E:\Daniel Caldeira bbb - 17700718 - GADE POE Part 1 (2) bes\Daniel Caldeira - 17700718 - GADE POE Part 1\bin\Debug\GADE POE Part 1.exe
+E:\Daniel Caldeira bbb - 17700718 - GADE POE Part 1 (2) bes\Daniel Caldeira - 17700718 - GADE POE Part 1\bin\Debug\GADE POE Part 1.pdb
+E:\Daniel Caldeira bbb - 17700718 - GADE POE Part 1 (2) bes\Daniel Caldeira - 17700718 - GADE POE Part 1\obj\Debug\GADE POE Part 1.csprojResolveAssemblyReference.cache
+E:\Daniel Caldeira bbb - 17700718 - GADE POE Part 1 (2) bes\Daniel Caldeira - 17700718 - GADE POE Part 1\obj\Debug\GADE_POE_Part_1.Form1.resources
+E:\Daniel Caldeira bbb - 17700718 - GADE POE Part 1 (2) bes\Daniel Caldeira - 17700718 - GADE POE Part 1\obj\Debug\GADE_POE_Part_1.Properties.Resources.resources
+E:\Daniel Caldeira bbb - 17700718 - GADE POE Part 1 (2) bes\Daniel Caldeira - 17700718 - GADE POE Part 1\obj\Debug\GADE POE Part 1.csproj.GenerateResource.Cache
+E:\Daniel Caldeira bbb - 17700718 - GADE POE Part 1 (2) bes\Daniel Caldeira - 17700718 - GADE POE Part 1\obj\Debug\GADE POE Part 1.csproj.CoreCompileInputs.cache
+E:\Daniel Caldeira bbb - 17700718 - GADE POE Part 1 (2) bes\Daniel Caldeira - 17700718 - GADE POE Part 1\obj\Debug\GADE POE Part 1.exe
+E:\Daniel Caldeira bbb - 17700718 - GADE POE Part 1 (2) bes\Daniel Caldeira - 17700718 - GADE POE Part 1\obj\Debug\GADE POE Part 1.pdb
