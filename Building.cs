@@ -9,52 +9,70 @@ namespace GADE_POE_Part_2
 {
     abstract class Building
     {
-        protected int xPos;
-        protected int yPos;
+        protected int x;
+        protected int y;
+        protected int health;
+        protected int maxHealth;
         protected string faction;
-        protected string symbol;
-        protected int hp;
+        protected char symbol;
+        protected bool isDestroyed = false;
 
-        public int Hp { get => hp; set => hp = value; }
-        public int XPos { get => xPos; set => xPos = value; }
-        public int YPos { get => yPos; set => yPos = value; }
-        public string Faction { get => faction; set => faction = value; }
-        public string Symbol { get => symbol; set => symbol = value; }
-
-        protected int blueResources;
-        protected int redResources;
-
-        public int BlueResources { get => blueResources; set => blueResources = value; }
-        public int RedResources { get => redResources; set => redResources = value; }
-
-        public Building(int Xpos, int Ypos, string faction, string symbol)
+        public Building(int x, int y, int health, string faction, char symbol)
         {
-
+            this.x = x;
+            this.y = y;
+            this.health = health;
+            this.maxHealth = health;
+            this.faction = faction;
+            this.symbol = symbol;
         }
 
-        public virtual int GenBlueResource()
+        public Building() { }
+
+        public int X
         {
-            return 0;
+            get { return x; }
         }
 
-        public virtual int GenRedResource()
+        public int Y
         {
-            return 0;
+            get { return y; }
         }
 
-        public string saveString()
+        public string Faction
         {
-            return (XPos + "," + YPos + "," + Hp + "," + Symbol + "," + Faction);
+            get { return faction; }
         }
 
-        private void Save()
+        public char Symbol
         {
-            FileStream saveUnits = new FileStream("unit.txt", FileMode.Open, FileAccess.Write);
-            StreamWriter save = new StreamWriter(saveUnits);
-            save.WriteLine(saveString());
-            save.Close();
-            saveUnits.Close();
+            get { return symbol; }
         }
 
+        public abstract void Destroy();
+
+        public abstract string Save();
+
+        public override string ToString()
+        {
+            return
+               "Faction: " + faction + Environment.NewLine +
+               "Position: " + x + ", " + y + Environment.NewLine +
+         "Health: " + health + " / " + maxHealth + Environment.NewLine;
+        }
+
+        public enum ResourceType
+        {
+            WOOD,
+            FOOD,
+            ROCK,
+            GOLD
+        }
+
+        public enum FactoryType
+        {
+            MELEE,
+            RANGE
+        }
     }
 }

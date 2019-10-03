@@ -9,27 +9,30 @@ namespace GADE_POE_Part_2
 {
     class GameEngine
     {
+        public static Random random = new Random();
+
+        const string UNITS_FILENAME = "units.txt";
+        const string BUIDLINGS_FILENAME = "buildings.txt";
+        const string ROUND_FILENAME = "rounds.txt";
+
         Map map;
-        
-        bool isGamover = false;
-        string winningfaction = "";
+        bool isGameOver = false;
+        string winningFaction = "";
         int round = 0;
 
         public GameEngine()
         {
-            map = new Map(10,10);  
-            
-           
+            map = new Map(10, 10);
         }
 
-        public bool isGameover
+        public bool IsGameOver
         {
-            get { return isGamover; }
+            get { return isGameOver; }
         }
 
         public string WinningFaction
         {
-            get { return winningfaction; }
+            get { return winningFaction; }
         }
 
         public int Round
@@ -37,140 +40,229 @@ namespace GADE_POE_Part_2
             get { return round; }
         }
 
-        public string GetMapDisplay()
-        {
-            return map.GetMapDisplay();
-        }
-
-        public string GetUnitUnfo()
-        {
-            string unitInfo = "";
-           
-            foreach( Unit unit in map.Units)
-            {
-                unitInfo += unit + "\n";
-            }
-
-
-            return unitInfo;
-        }
-
-        
-        public string GetBuildUnfo()
-        {
-            string buildInfo = "";
-
-            foreach (Building build in map.build)
-            {
-                buildInfo += build + "\n";
-            }
-
-
-            return buildInfo;
-        }
-
-
-
-
-        public void Reset()
-        {
-            map.Reset();
-            isGamover = false;
-            round = 0;
-        }
-
         public void GameLoop()
         {
-            foreach(Unit unit in map.Units)
+            UpdateUnits();
+            UpdateBuildings();
+            map.UpdateMap();
+            round++;
+        }
+
+        void UpdateBuildings()
+        {
+            foreach (Building building in map.Buildings)
             {
-                if(unit.IsDestroyed)
+                if (building is FactoryBuilding)
+                {
+                    FactoryBuilding factoryBuilding = (FactoryBuilding)building;
+
+                    if (round % factoryBuilding.ProductionSpeed == 0)
+                    {
+                        Unit newUnit = factoryBuilding.SpawnUnit();
+                        map.AddUnit(newUnit);
+                    }
+                }
+
+                else if (building is ResourceBuilding)
+                {
+                    ResourceBuilding resourceBuilding = (ResourceBuilding)building;
+                    resourceBuilding.GenerateResources();
+
+                }
+                
+            }
+        }
+
+
+        void UpdateUnits()
+        {
+            foreach (Unit unit in map.Units)
+            {
+                //ignore this unit if it is destroyed 
+                if (unit.IsDestroyed)
                 {
                     continue;
                 }
 
+
                 Unit closestUnit = unit.GetClosestUnit(map.Units);
-                if(closestUnit ==null)
+                if (closestUnit == null)
                 {
-                    isGamover = true;
-                    winningfaction = unit.Faction;
-                    map.updateMap();
+                    //if a unit has not target it means the game has ended 
+                    isGameOver = true;
+                    winningFaction = unit.Faction;
+                    map.UpdateMap();
                     return;
                 }
 
-                double healthpercentage = unit.Hp / unit.MaxHp;
-                if(healthpercentage <= 0.25)
+                double healthPercentage = unit.Health / unit.MaxHealth;
+                if (healthPercentage <= 0.25)
                 {
                     unit.RunAway();
                 }
-                else if(unit.InRange(closestUnit))
+
+                else if (unit.IslnRange(closestUnit))
                 {
                     unit.Attack(closestUnit);
                 }
+
                 else
                 {
                     unit.Move(closestUnit);
                 }
-                stayinBounds(unit, map.Size);
+                StaylnBounds(unit, map.Size);
             }
-            
-            
-
-            map.updateMap();
-            round++;
             
         }
 
-
-
-        private void stayinBounds(Unit unit, int size)
+        private void StaylnBounds(Unit unit, int size)
         {
-            if(unit.XPosition< 0)
+            if (unit.X < 0)
             {
-                unit.XPosition = 0;
-            }
-            else if(unit.XPosition >= size)
-            {
-                unit.XPosition = size - 1;
+                unit.X = 0;
             }
 
-            if(unit.YPosition < 0)
+            else if (unit.X >= size)
             {
-                unit.YPosition = 0;
-            }
-            else if(unit.YPosition >= size)
-            {
-                unit.YPosition = size - 1;
+                unit.X = size - 1;
             }
 
 
-            
+            if (unit.Y < 0)
+            {
+                unit.Y = 0;
+            }
+
+            else if (unit.Y >= size)
+            {
+                unit.Y = size - 1;
+            }
         }
 
-        public string saveString()
+        public int NumUnits
         {
-            return map.Units.ToString();
+            get { return map.Units.Length; }
         }
 
-        public void Save()
+        public int NumBuildings
         {
-            FileStream saveUnits = new FileStream("unit.txt", FileMode.Open, FileAccess.Write);
-            StreamWriter save = new StreamWriter(saveUnits);
-            save.WriteLine(saveString());
-            save.Close();
-            saveUnits.Close();
+            get { return map.Buildings.Length; }
         }
-       
 
+        public string MapDisplay
+        {
+            get { return map.GetMapDisplay(); }
+        }
 
+        public string GetUnitInfo()
+        {
+            string unitlnfo = "";
+            foreach (Unit unit in map.Units)
+            {
+                unitlnfo += unit + Environment.NewLine;
+            }
+            return unitlnfo;
+        }
 
-        //public void PlayGame()
-        //{
+        public string GetBuildingsInfo()
+        {
+            string buildingslnfo = "";
+            foreach (Building building in map.Buildings)
+            {
+                buildingslnfo += building + Environment.NewLine;
+            }
+            return buildingslnfo;
+        }
 
-        //}
+        public void Reset()
+        {
+            map.Reset();
+            isGameOver = false;
+            round = 0;
+        }
 
+        public void SaveGame()
+        {
+            Save(UNITS_FILENAME, map.Units);
+            Save(BUIDLINGS_FILENAME, map.Buildings);
+            SaveRound();
+        }
+
+        public void LoadGame()
+        {
+            map.Clear();
+            Load(UNITS_FILENAME);
+            Load(BUIDLINGS_FILENAME);
+            LoadRound();
+            map.UpdateMap();
+        }
+
+        private void Load(string filename)
+        {
+            FileStream inFile = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            StreamReader reader = new StreamReader(inFile);
+
+            string recordln;
+            recordln = reader.ReadLine();
+            while (recordln != null)
+            {
+                int length = recordln.IndexOf(",");
+                string firstField = recordln.Substring(0, length);
+                switch (firstField)
+                {
+                    case "Melee": map.AddUnit(new MeleeUnit(recordln)); break;
+                    case "Ranged": map.AddUnit(new RangedUnit(recordln)); break;
+                    case "Factory": map.AddBuilding(new FactoryBuilding(recordln)); break;
+                    case "Resource": map.AddBuilding(new ResourceBuilding(recordln)); break;
+                }
+                recordln = reader.ReadLine();
+            }
+
+            reader.Close();
+            inFile.Close();
+
+        }
+
+        private void Save(string filename, object[] objects)
+        {
+            FileStream outFile = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            StreamWriter writer = new StreamWriter(outFile);
+            foreach (object obj in objects)
+            {
+                if (obj is Unit)
+                {
+                    Unit unit = (Unit)obj;
+                    writer.WriteLine(unit.Save());
+                }
+                else if (obj is Building)
+                {
+                    Building unit = (Building)obj;
+                    writer.WriteLine(unit.Save());
+                }
+            }
+            writer.Close();
+            outFile.Close();
+        }
+
+        private void SaveRound()
+        {
+            FileStream outFile = new FileStream(ROUND_FILENAME, FileMode.Create, FileAccess.Write);
+            StreamWriter writer = new StreamWriter(outFile);
+            writer.WriteLine(round);
+            writer.Close();
+            outFile.Close();
+        }
+
+        private void LoadRound()
+        {
+            FileStream inFile = new FileStream(
+              ROUND_FILENAME, FileMode.Open, FileAccess.Read );
+            StreamReader reader = new StreamReader(inFile);
+            round = int.Parse(reader.ReadLine());
+            reader.Close();
+            inFile.Close();
+        }
     }
-    
-       
-
-    
 }
+
+

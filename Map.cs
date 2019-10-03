@@ -8,48 +8,152 @@ namespace GADE_POE_Part_2
 {
     class Map
     {
-        int mapSize = 20;
-        Random rand = new Random();
-        int numUnits;
-        int numBuild;
+        public const int SIZE = 20;
+
         Unit[] units;
-        Building[] building;
+        Building[] buildings;
 
         string[,] map;
-        string[] factions = { "A-team", "B-team" };
-        
-        //public Unit[] units = new Unit[10];
-        //string[] Names = new string[] { "Tashina", "Keren", "Elane", "Sharonda", "Darrick", "Myrtice", "Tawana", "Irvin", "Nadene", "Phoebe", "Hilaria", "Shera", "Monty", "Jolyn", "Minh", "Solomon", "Jami", "Shalanda", "Kristina", "Su " };
+        string[] factions = { "A-Team", "B-Team" };
 
-        //Random rnd = new Random();
+        int numUnits;
+        int numBuildings;
 
-        public Map(int numUnits, int numBuilding)
+        public Map(int numUnits, int numBuildings)
         {
             this.numUnits = numUnits;
-            this.numBuild = numBuilding;
+            this.numBuildings = numBuildings;
+
             Reset();
         }
 
         public Unit[] Units
         {
-            get { return units; }
+            get
+            {
+                return units;
+            }
+           
         }
 
-        public Building[] build
+        public Building[] Buildings
         {
-            get { return building; }
+            get { return buildings; }
         }
+
         public int Size
         {
-            get { return mapSize; }
+            get { return SIZE; }
+        }
+
+        private void InitializeUnits()
+        {
+            units = new Unit[numUnits];
+
+            for (int i = 0; i < units.Length; i++)
+            {
+                int x = GameEngine.random.Next(0, SIZE);
+                int y = GameEngine.random.Next(0, SIZE);
+                int factionlndex = GameEngine.random.Next(0, 2);
+                int unitType = GameEngine.random.Next(0, 2);
+
+                while (map[x, y] != null)
+                {
+                    x = GameEngine.random.Next(0, SIZE);
+                    y = GameEngine.random.Next(0, SIZE);
+                }
+
+                if (unitType == 0)
+                {
+                     units[i] = new MeleeUnit(x, y, factions[factionlndex]);
+                }
+
+                else
+                {
+                        units[i] = new RangedUnit(x, y, factions[factionlndex]);  
+                }
+                map[x, y] = units[i].Faction[0] + "/" + units[i].Symbol;
+            }
+        }
+
+        private void InitializeBuildings()
+        {
+            buildings = new Building[numBuildings];
+
+            for (int i = 0; i < buildings.Length; i++)
+            {
+                int x = GameEngine.random.Next(0, SIZE);
+                int y = GameEngine.random.Next(0, SIZE);
+                int factionlndex = GameEngine.random.Next(0, 2);
+                int buildingType = GameEngine.random.Next(0, 2);
+
+                while (map[x, y] != null)
+                {
+                    x = GameEngine.random.Next(0, SIZE);
+                    y = GameEngine.random.Next(0, SIZE);
+
+                }
+                if (buildingType == 0)
+                {
+                        buildings[i] = new ResourceBuilding(x, y, factions[factionlndex]);
+                }
+
+                else
+                {
+                        buildings[i] = new FactoryBuilding(x, y, factions[factionlndex]);
+                }
+                    map[x, y] = buildings[i].Faction[0] + "/" + buildings[i].Symbol;
+            }
+        }
+
+        public void AddUnit(Unit unit)
+        {
+
+            Unit[] resizeUnits = new Unit[units.Length + 1];
+
+            for (int i = 0; i < units.Length; i++)
+            {
+                resizeUnits[i] = units[i];
+            }
+                resizeUnits[resizeUnits.Length - 1] = unit;
+                units = resizeUnits;
+        }
+
+        public void AddBuilding(Building building)
+        {
+            Array.Resize(ref buildings, buildings.Length + 1);
+            buildings[buildings.Length - 1] = building;
+        }
+
+        public void UpdateMap()
+        {
+            for (int y = 0; y < SIZE; y++)
+            {
+                for (int x = 0; x < SIZE; x++)
+                {
+                    map[x, y] = "  ";
+
+                }
+            }
+
+            foreach (Unit unit in units)
+            {
+                map[unit.X, unit.Y] = unit.Symbol + "|" + unit.Faction[0];
+            }
+
+            foreach (Building building in buildings)
+            {
+                map[building.X, building.Y] = building.Symbol + "|" + building.Faction[0];
+
+            }
         }
 
         public string GetMapDisplay()
         {
             string mapString = "";
-            for(int y =0; y < mapSize; y++)
+            for (int y = 0; y < SIZE; y++)
             {
-                for(int x =0; x < mapSize; x++)
+                for (int x = 0; x < SIZE; x++)
                 {
                     mapString += map[x, y];
                 }
@@ -58,182 +162,18 @@ namespace GADE_POE_Part_2
             return mapString;
         }
 
+        public void Clear()
+        {
+            units = new Unit[0];
+            buildings = new Building[0];
+        }
+
         public void Reset()
         {
-            map = new string[mapSize, mapSize];
-            units = new Unit[numUnits];
-            building = new Building[numBuild];
+            map = new string[SIZE, SIZE];
             InitializeUnits();
-            initializeBuildings();
-            updateMap();
-           
+            InitializeBuildings();
+            UpdateMap();
         }
-
-        public void updateMap()
-        {
-            for(int y=0; y < mapSize; y++)
-            {
-                for(int x =0; x < mapSize; x++)
-                {
-                    map[x, y] = " . ";
-                }
-            }
-
-            foreach(Unit unit in Units)
-            {
-                map[unit.XPosition, unit.YPosition] = unit.Faction[0] + "/" + unit.Symbol;
-            }
-
-            foreach(Building build in build)
-            {
-                map[build.XPos, build.YPos] = build.Faction[1] + " " + build.Symbol;
-            }
-            
-            
-
-           
-            
-        }
-
-
-
-       
-
-        private void InitializeUnits()
-        {
-            for (int i = 0; i < units.Length; i++)
-            {
-                int x = rand.Next(0, mapSize);
-                int y = rand.Next(0, mapSize);
-                int factionIndex = rand.Next(0, 2);
-                int unitType = rand.Next(0, 2);
-
-                while (map[x, y] != null)
-                {
-                    x = rand.Next(0, mapSize);
-                    y = rand.Next(0, mapSize);
-                }
-
-                if (unitType == 0)
-                {
-                    units[i] = new MeleeUnit(x, y, factions[factionIndex]);
-                }
-                else
-                {
-                    units[i] = new RangedUnit(x, y, factions[factionIndex]);
-                }
-                map[x, y] = units[i].Faction[0] + "/" + units[i].Symbol;
-            }
-        }
-
-        private void initializeBuildings()
-        {
-            for (int i = 0; i < building.Length; i++)
-            {
-                int x = rand.Next(0, mapSize);
-                int y = rand.Next(0, mapSize);
-                int factionIndex = rand.Next(0, 2);
-                int buildingtype = rand.Next(0, 2);
-
-                while (map[x, y] != null)
-                {
-                    x = rand.Next(0, mapSize);
-                    y = rand.Next(0, mapSize);
-                }
-
-                if (buildingtype == 0)
-                {
-                    building[i] = new ResourceBuilding(rand.Next(x,mapSize),rand.Next(y,mapSize),"A-TEAM", "V");
-                }
-                else
-                {
-                    building[i] = new FactoryBuilding(rand.Next(y,mapSize),rand.Next(x,mapSize),"B-TEAM", "F");
-                }
-                map[x, y] = building[i].Faction[0] + "/" + building[i].Symbol;
-            }
-
-            
-        }
-
-       
-
-
-
-        //public void GetMap()
-        //{
-        //    for (int y = 0; y < 20; y++)
-        //    {
-        //        for(int x = 0; x < 20; x++)
-        //        {
-        //            GameMap[y, x] = " ";
-        //        }
-        //    }
-        //}
-
-        //public void PopulateMap()
-        //{
-        //    SpawnUnits();
-
-        //    for(int k = 0; k < units.Length; k++)
-        //    {
-        //        Console.WriteLine(units[k].ToString());
-        //    }
-
-        //}
-
-        //    public void SpawnUnits()
-        //    {
-        //        for (int k = 0; k < units.Length; k++)
-        //        {
-        //            int Type;
-        //            int Faction;
-        //            int name = rnd.Next(0, Names.Length);
-
-        //            string myFaction = "";
-        //            string mySymbol = "";
-        //            int x = rnd.Next(1, 20);
-        //            int y = rnd.Next(1, 20);
-
-        //            Type = rnd.Next(1, 3);
-
-        //            switch (Type)
-        //            {
-        //                case 1:
-        //                    Faction = rnd.Next(1, 3);
-
-        //                    switch (Faction)
-        //                    {
-        //                        case 1:
-        //                            myFaction = "Gold Team";
-        //                            mySymbol = "M";
-        //                            break;
-        //                        case 2:
-        //                            myFaction = "Silver Team";
-        //                            mySymbol = "m";
-        //                            break;
-        //                    }
-        //                    units[k] = new MeleeUnit(x, y, myFaction, mySymbol, Names[name]);
-        //                    break;
-
-        //                case 2:
-        //                    Faction = rnd.Next(1, 3);
-
-        //                    switch (Faction)
-        //                    {
-        //                        case 1:
-        //                            myFaction = "Gold Team";
-        //                            mySymbol = "R";
-        //                            break;
-        //                        case 2:
-        //                            myFaction = "Silver Team";
-        //                            mySymbol = "r";
-        //                            break;
-        //                    }
-        //                    units[k] = new MeleeUnit(x, y, myFaction, mySymbol, Names[name]);
-        //                    break;
-        //            }
-        //            GameMap[units[k].YPosition, units[k].XPosition] = units[k].Symbol;            
-        //        }
-        //    }
     }
 }

@@ -9,86 +9,192 @@ namespace GADE_POE_Part_2
 {
     abstract class Unit
     {
-        protected int xPosition;
-        protected int yPosition;
-        protected int hp;
-        protected int maxHp; 
-        protected int attack;
+        protected int x;
+        protected int y;
+        protected int health;
+        protected int maxHealth;
         protected int speed;
+        protected int attack;
         protected int attackRange;
         protected string faction;
         protected char symbol;
         protected bool isAttacking = false;
-        protected bool isDestroyed = false;
-        public static Random rand = new Random();
+        protected string name;
 
-        public Unit(int X, int Y, int Health, int Speed, int Attack, int AttackRange, char Symbol, string Faction)
+        protected bool isDestroyed = false;
+        public static Random random = new Random();
+
+        public Unit(int x, int y, int health, int speed, int attack, int attackRange, string faction, char symbol, string name)
         {
-            this.xPosition = X;
-            this.yPosition = Y;
-            this.hp = Health;
-            maxHp = Health;
-            this.speed = Speed;
-            this.attack = Attack;
-            this.attackRange = AttackRange;
-            this.faction = Faction;
-            this.symbol = Symbol;
+            this.x = x;
+            this.y = y;
+            this.health = health;
+            maxHealth = health;
+            this.speed = speed;
+            this.attack = attack;
+            this.attackRange = attackRange;
+            this.faction = faction;
+            this.symbol = symbol;
+            this.name = name;
         }
 
-        public abstract int XPosition { get ; set; }
-        public abstract int YPosition { get ; set; }
-        public abstract int Hp { get ; set; }
-        public abstract int MaxHp { get; }
-        public abstract string Faction { get; }
-        public abstract char Symbol { get; }
-        public abstract bool IsDestroyed { get ; }
-
-       
-
-        public abstract Unit GetClosestUnit(Unit[] units);
-
-        public abstract bool InRange(Unit enemy);
-
-        public abstract void Move(Unit closestUnit);
-
-        public abstract void Attack(Unit enemy);
-
-        public abstract void RunAway();
-
-        public abstract void Destroy();
-
-        protected double GetDistance(Unit enemy)
+        public Unit(string values)
         {
-            double distanceX = (enemy.XPosition - XPosition);
-            double distanceY = (enemy.YPosition - YPosition);
-            return Math.Sqrt(distanceX * distanceX + distanceY * distanceY);
+            string[] parameters = values.Split(',');
+
+            x = int.Parse(parameters[1]);
+            y = int.Parse(parameters[2]);
+            health = int.Parse(parameters[3]);
+            maxHealth = int.Parse(parameters[4]);
+            speed = int.Parse(parameters[5]);
+            attack = int.Parse(parameters[6]);
+            attackRange = int.Parse(parameters[7]);
+            faction = parameters[8];
+            symbol = parameters[9][0];
+            name = parameters[10];
+            isDestroyed = parameters[11] == "True" ? true : false;
+        }
+
+        public abstract string Save();
+
+        public int X
+        {
+            get { return x; }
+            set { x = value; }
+        }
+
+        public int Y
+        {
+            get { return y; }
+            set { y = value; }
+        }
+
+        public int Health
+        {
+            get { return health; }
+            set { health = value; }
+        }
+
+        public int MaxHealth
+        {
+            get { return maxHealth; }
+        }
+
+        public string Faction
+        {
+            get { return faction; }
+        }
+
+        public char Symbol
+        {
+            get { return symbol; }
+        }
+
+        public bool IsDestroyed
+        {
+            get { return isDestroyed; }
+        }
+
+        public string Name
+        {
+            get { return name; }
+        }
+
+        public virtual void Attack(Unit otherUnit)
+        {
+            isAttacking = true;
+            otherUnit.Health -= attack;
+
+            if (otherUnit.Health <= 0)
+            {
+                otherUnit.Health = 0;
+                otherUnit.Destroy();
+            }
+        }
+
+        public virtual void Destroy()
+        {
+            isDestroyed = true;
+            isAttacking = false;
+            symbol = 'X';
+        }
+
+        public virtual Unit GetClosestUnit(Unit[] units)
+        {
+            double closestDistance = int.MaxValue;
+            Unit closestUnit = null;
+
+            foreach (Unit otherUnit in units)
+            {
+                if (otherUnit == this || otherUnit.Faction == faction || otherUnit.IsDestroyed)
+                {
+                    continue;
+                }
+
+                double distance = GetDistance(otherUnit);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestUnit = otherUnit;
+                }
+            }
+            return closestUnit;
+        }
+
+        public virtual bool IslnRange(Unit otherUnit)
+        {
+            return GetDistance(otherUnit) <= attackRange;
+        }
+
+        public virtual void Move(Unit closestUnit)
+        {
+            int xDirection = closestUnit.X - X;
+            int yDirection = closestUnit.Y - Y;
+
+            if (Math.Abs(xDirection) > Math.Abs(yDirection))
+            {
+                x += Math.Sign(xDirection);
+            }
+            else
+            {
+                y += Math.Sign(yDirection);
+            }
+        }
+
+        public virtual void RunAway()
+        {
+            int direction = random.Next(0, 4);
+            if (direction == 0)
+            {
+                x += 1;
+            }
+            else if (direction == 1)
+            {
+                x -= 1;
+            }
+            else if (direction == 2)
+            {
+                y += 1;
+            }
+            else
+            {
+                y -= 1;
+            }
+        }
+
+        protected double GetDistance(Unit otherUnit)
+        {
+            double xDistance = otherUnit.X - X;
+            double yDistance = otherUnit.Y - Y;
+            return Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
         }
 
         public override string ToString()
         {
-            return "Position" + XPosition + "," + YPosition + "Health" + hp + " / " + maxHp + " Faction " + faction + "Symbol" + symbol;
+            return
+                    "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" + Environment.NewLine + name + " (" + symbol + "/" + faction[0] + ")" + Environment.NewLine +
+                 "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" + Environment.NewLine + "Faction: " + faction + Environment.NewLine + "Position: " + x + ", " + y + Environment.NewLine + "Health: " + health + " / " + maxHealth + Environment.NewLine;
         }
-
-        public string saveString()
-        {
-            return (XPosition + "," + YPosition + "," + Hp + "," + Symbol + "," + Faction);
-        }
-
-        private void Save()
-        {
-            FileStream saveUnits = new FileStream("unit.txt", FileMode.Open, FileAccess.Write);
-            StreamWriter save = new StreamWriter(saveUnits);
-            save.WriteLine(saveString());
-            save.Close();
-            saveUnits.Close();
-        }
-
-       
-
-
-
     }
-
-
-
 }
+                

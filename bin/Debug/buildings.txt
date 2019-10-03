@@ -1,0 +1,10 @@
+Factory,9,19,100,100,1,4,18,B-Team,~,False
+Resource,13,18,100,100,0,4,8,116,B-Team,^,False
+Factory,16,19,100,100,0,5,18,A-Team,~,False
+Resource,4,16,100,100,3,4,8,130,A-Team,^,False
+Factory,5,5,100,100,1,6,6,A-Team,~,False
+Factory,18,13,100,100,0,5,14,B-Team,~,False
+Resource,19,9,100,100,1,4,8,180,B-Team,^,False
+Factory,12,15,100,100,1,6,16,A-Team,~,False
+Resource,18,19,100,100,3,2,4,191,B-Team,^,False
+Resource,3,13,100,100,1,5,10,91,A-Team,^,False

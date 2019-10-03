@@ -1,0 +1,15 @@
+Melee,16,3,200,200,2,20,1,B-Team,*,Swordsman,False
+Ranged,10,16,100,100,1,10,3,B-Team,-,Archer,False
+Melee,14,4,180,200,2,20,1,B-Team,*,Swordsman,False
+Ranged,4,2,100,100,1,10,3,B-Team,-,Archer,False
+Melee,5,2,200,200,2,20,1,B-Team,*,Swordsman,False
+Melee,12,14,200,200,2,20,1,A-Team,*,Swordsman,False
+Ranged,15,5,100,100,1,10,3,A-Team,-,Archer,False
+Ranged,19,19,100,100,1,10,3,B-Team,-,Archer,False
+Ranged,17,16,80,100,1,10,3,A-Team,-,Archer,False
+Melee,4,7,200,200,2,20,1,A-Team,*,Swordsman,False
+Ranged,10,18,100,100,1,10,3,B-Team,-,Archer,False
+Melee,17,18,200,200,2,20,1,A-Team,*,Swordsman,False
+Ranged,5,5,100,100,1,10,3,A-Team,-,Archer,False
+Melee,18,15,200,200,2,20,1,B-Team,*,Swordsman,False
+Ranged,11,16,90,100,1,10,3,A-Team,-,Archer,False

@@ -1,0 +1,10 @@
+C:\Users\User\Documents\Github\Task2\obj\Debug\GADE POE Part 2.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\Github\Task2\obj\Debug\GADE_POE_Part_2.FrmMain.resources
+C:\Users\User\Documents\Github\Task2\obj\Debug\GADE_POE_Part_2.Properties.Resources.resources
+C:\Users\User\Documents\Github\Task2\obj\Debug\GADE POE Part 2.csproj.GenerateResource.Cache
+C:\Users\User\Documents\Github\Task2\obj\Debug\GADE POE Part 2.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\Github\Task2\bin\Debug\GADE POE Part 2.exe.config
+C:\Users\User\Documents\Github\Task2\bin\Debug\GADE POE Part 2.exe
+C:\Users\User\Documents\Github\Task2\bin\Debug\GADE POE Part 2.pdb
+C:\Users\User\Documents\Github\Task2\obj\Debug\GADE POE Part 2.exe
+C:\Users\User\Documents\Github\Task2\obj\Debug\GADE POE Part 2.pdb

@@ -1,6 +1,6 @@
 ﻿namespace GADE_POE_Part_2
 {
-    partial class Form1
+    partial class FrmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -28,26 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.lblMap = new System.Windows.Forms.Label();
             this.lblRoundCount = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.rtbUnitInfo = new System.Windows.Forms.RichTextBox();
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.lblAteam = new System.Windows.Forms.Label();
-            this.lblBteam = new System.Windows.Forms.Label();
+            this.lblUnits = new System.Windows.Forms.Label();
+            this.lblBuildings = new System.Windows.Forms.Label();
             this.cmbBuild = new System.Windows.Forms.ComboBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
+            this.rtbBuildingInfo = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // lblMap
             // 
             this.lblMap.AutoSize = true;
-            this.lblMap.Location = new System.Drawing.Point(40, 68);
+            this.lblMap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMap.Location = new System.Drawing.Point(38, 18);
             this.lblMap.Name = "lblMap";
-            this.lblMap.Size = new System.Drawing.Size(35, 17);
+            this.lblMap.Size = new System.Drawing.Size(37, 19);
             this.lblMap.TabIndex = 0;
             this.lblMap.Text = "Map";
             // 
@@ -84,41 +84,37 @@
             // rtbUnitInfo
             // 
             this.rtbUnitInfo.Location = new System.Drawing.Point(403, 130);
-            this.rtbUnitInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rtbUnitInfo.Margin = new System.Windows.Forms.Padding(4);
             this.rtbUnitInfo.Name = "rtbUnitInfo";
             this.rtbUnitInfo.Size = new System.Drawing.Size(167, 154);
             this.rtbUnitInfo.TabIndex = 4;
             this.rtbUnitInfo.Text = "";
             // 
-            // timer2
+            // lblUnits
             // 
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            this.lblUnits.AutoSize = true;
+            this.lblUnits.Location = new System.Drawing.Point(500, 31);
+            this.lblUnits.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblUnits.Name = "lblUnits";
+            this.lblUnits.Size = new System.Drawing.Size(40, 17);
+            this.lblUnits.TabIndex = 5;
+            this.lblUnits.Text = "Units";
             // 
-            // lblAteam
+            // lblBuildings
             // 
-            this.lblAteam.AutoSize = true;
-            this.lblAteam.Location = new System.Drawing.Point(500, 31);
-            this.lblAteam.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblAteam.Name = "lblAteam";
-            this.lblAteam.Size = new System.Drawing.Size(46, 17);
-            this.lblAteam.TabIndex = 5;
-            this.lblAteam.Text = "label1";
-            // 
-            // lblBteam
-            // 
-            this.lblBteam.AutoSize = true;
-            this.lblBteam.Location = new System.Drawing.Point(745, 31);
-            this.lblBteam.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblBteam.Name = "lblBteam";
-            this.lblBteam.Size = new System.Drawing.Size(46, 17);
-            this.lblBteam.TabIndex = 6;
-            this.lblBteam.Text = "label1";
+            this.lblBuildings.AutoSize = true;
+            this.lblBuildings.Location = new System.Drawing.Point(745, 31);
+            this.lblBuildings.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblBuildings.Name = "lblBuildings";
+            this.lblBuildings.Size = new System.Drawing.Size(65, 17);
+            this.lblBuildings.TabIndex = 6;
+            this.lblBuildings.Text = "Buildings";
             // 
             // cmbBuild
             // 
             this.cmbBuild.FormattingEnabled = true;
             this.cmbBuild.Location = new System.Drawing.Point(605, 142);
-            this.cmbBuild.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbBuild.Margin = new System.Windows.Forms.Padding(4);
             this.cmbBuild.Name = "cmbBuild";
             this.cmbBuild.Size = new System.Drawing.Size(211, 24);
             this.cmbBuild.TabIndex = 7;
@@ -141,25 +137,36 @@
             this.btnLoad.TabIndex = 9;
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
-            // Form1
+            // rtbBuildingInfo
+            // 
+            this.rtbBuildingInfo.Location = new System.Drawing.Point(605, 174);
+            this.rtbBuildingInfo.Margin = new System.Windows.Forms.Padding(4);
+            this.rtbBuildingInfo.Name = "rtbBuildingInfo";
+            this.rtbBuildingInfo.Size = new System.Drawing.Size(167, 154);
+            this.rtbBuildingInfo.TabIndex = 10;
+            this.rtbBuildingInfo.Text = "";
+            // 
+            // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(848, 519);
+            this.Controls.Add(this.rtbBuildingInfo);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.cmbBuild);
-            this.Controls.Add(this.lblBteam);
-            this.Controls.Add(this.lblAteam);
+            this.Controls.Add(this.lblBuildings);
+            this.Controls.Add(this.lblUnits);
             this.Controls.Add(this.rtbUnitInfo);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblRoundCount);
             this.Controls.Add(this.lblMap);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "FrmMain";
+            this.Text = "FrmMain";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -173,12 +180,12 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.RichTextBox rtbUnitInfo;
-        private System.Windows.Forms.Timer timer2;
-        private System.Windows.Forms.Label lblAteam;
-        private System.Windows.Forms.Label lblBteam;
+        private System.Windows.Forms.Label lblUnits;
+        private System.Windows.Forms.Label lblBuildings;
         private System.Windows.Forms.ComboBox cmbBuild;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnLoad;
+        private System.Windows.Forms.RichTextBox rtbBuildingInfo;
     }
 }
 
